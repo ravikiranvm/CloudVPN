@@ -1,0 +1,21 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+.terraform/
+terraform.tfvars
+
+# AWS credentials
+.aws/
+
+# IDE/editor files
+.idea/
+.vscode/
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
+
+# Backup files
+*.bak
