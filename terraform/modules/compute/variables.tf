@@ -8,3 +8,8 @@ variable "security_group_id" {
   description = "The security group ID to associate with the EC2 instance"
   type        = string
 }
+
+variable instance_profile_name {
+  description = "Instance profile to access s3"
+  type = string
+}
