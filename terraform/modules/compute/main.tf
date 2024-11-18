@@ -6,6 +6,8 @@ resource "aws_instance" "wireguard_instance" {
     instance_type = "t2.micro"
     subnet_id = var.subnet_id
     key_name = "CloudVPNInstanceKey"
+
+    iam_instance_profile = var.instance_profile_name
     
     #security_groups = [var.security_group_id] # security_groups is for classic ec2 and default vpc only
     vpc_security_group_ids = [var.security_group_id]
@@ -16,6 +18,13 @@ resource "aws_instance" "wireguard_instance" {
 
     user_data = <<-EOT
                 #!/bin/bash
+
+                # Install aws cli
+                sudo apt install unzip -y
+                curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+                unzip awscliv2.zip
+                sudo ./aws/install
+
                 # Install WireGuard
                 apt update
                 apt install -y wireguard
@@ -36,6 +45,9 @@ resource "aws_instance" "wireguard_instance" {
                 Address = $SERVER_IP
                 ListenPort = 51820
                 PrivateKey = $SERVER_PRIVATE_KEY
+
+                PostUp = iptables -t nat -A POSTROUTING -o enX0 -j MASQUERADE
+                PostDown = iptables -t nat -D POSTROUTING -o enX0 -j MASQUERADE
 
                 [Peer]
                 PublicKey = $CLIENT_PUBLIC_KEY
@@ -58,9 +70,18 @@ resource "aws_instance" "wireguard_instance" {
                 chmod 600 /etc/wireguard/wg0.conf
                 chmod 600 /home/ubuntu/wg-client.conf
 
+                #IP forwarding
+                echo "net.ipv4.ip_forward=1" >> /etc/sysctl.conf
+                sysctl -p
+
                 # Start and enable WireGuard service
                 systemctl enable wg-quick@wg0
                 systemctl start wg-quick@wg0
+
+                # Copy client conf file to S3 bucket
+                sudo aws s3 cp "/home/ubuntu/wg-client.conf" s3://client-vpn-conf-files/
+
+
                 EOT
 
 }
