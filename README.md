@@ -14,6 +14,8 @@ Unlike commercial VPN services, a self-hosted VPN server offers significant bene
 
 ## Project Architecture
 
+![image](https://github.com/user-attachments/assets/67e5763b-f1c2-4179-b5e1-febfcb0e5d47)
+
 The project is designed with a modular approach, separating key infrastructure components into reusable modules. These include:
 1. **Compute Module**: EC2 instance provisioning and WireGuard VPN setup.
 2. **IAM Role and Policy Module**: Secure permissions for EC2 to interact with S3.
