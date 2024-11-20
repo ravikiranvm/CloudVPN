@@ -96,7 +96,11 @@ The project is designed with a modular approach, separating key infrastructure c
 
 7. **Set Up WireGuard**
    * Install the WireGuard app on your device.
-   * Import the `wg-client.conf` file into the app.
+     ***For Android, download the [Wireguard app](https://play.google.com/store/apps/details?id=com.wireguard.android&pcampaignid=web_share) from the playstore.
+     <img width="1373" alt="Screenshot 2024-11-20 at 4 15 44 PM" src="https://github.com/user-attachments/assets/1eeb5bae-a892-4389-a8c2-3a218b28120b">
+
+   * Import the `wg-client.conf` file which you downloaded from your S3 bucket into the app.
+     ![wg](https://github.com/user-attachments/assets/fdee9981-6e88-4b04-a78a-acd58e08da57)
 
 8. **Connect to the VPN**
    * Activate the imported configuration in WireGuard.
