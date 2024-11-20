@@ -31,7 +31,7 @@ The project is designed with a modular approach, separating key infrastructure c
 4. **Infrastructure as Code (IaC)**: Fully automated setup using Terraform modules.
 5. **Modularity**: Reusable Terraform modules for compute, IAM, storage, and networking.
 
-## Technologies Used
+## AWS Services & Other Tools Used
 
 * **AWS EC2**: Virtual server for WireGuard VPN.
 * **AWS S3**: Secure storage for the WireGuard client configuration file.
