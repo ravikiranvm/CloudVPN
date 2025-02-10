@@ -14,12 +14,8 @@ Unlike commercial VPN services, a self-hosted VPN server offers significant bene
 
 ## Project Architecture
 
-<<<<<<< HEAD
-![image](https://github.com/user-attachments/assets/67e5763b-f1c2-4179-b5e1-febfcb0e5d47)
-=======
 Project Architecture:
 ![alt text](<CloudVPN Architecture Diagram.png>)
->>>>>>> 9fc3fe1 (Added remote backend to store state file; User data script moved to a separate file)
 
 The project is designed with a modular approach, separating key infrastructure components into reusable modules. These include:
 1. **Compute Module**: EC2 instance provisioning and WireGuard VPN setup.
