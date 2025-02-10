@@ -2,6 +2,11 @@ provider "aws" {
     region = "ap-southeast-1"
 }
 
+# referencing the state module
+module "state" {
+    source = "./modules/state"
+}
+
 # referencing the VPC module
 
 module "vpc" {
@@ -43,6 +48,19 @@ resource "aws_iam_role_policy_attachment" "s3AccessToEC2" {
     role = module.iam_role.role_name
     policy_arn = module.iam_policy.policy_arn
 }
+
+
+# backend config for storing the state file in s3 bucket
+terraform {
+    backend "s3" {
+        bucket = "cloudvpnstate31"
+        key = "CloudVPN/terraform.tfstate"
+        region = "ap-southeast-1"
+        encrypt = true
+        use_lockfile = true
+    }
+}
+
 
 
 
